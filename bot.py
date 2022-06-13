@@ -455,10 +455,10 @@ class CoWorkingBot(Bot):
     @commands.command(name="purgeboard")
     async def purgeBoard(self, ctx: commands.Context):
         if (ctx.author.name == ctx.channel.name):
-            for user in self.tasks[ctx.channel.name].keys():
-                self.tasks[ctx.channel.name].pop(user)
+            self.tasks[ctx.channel.name] = dict()
             for user in self.asyncTasks[ctx.channel.name].keys():
-                self.asyncTasks[ctx.channel.name].pop(user).cancel()
+                self.asyncTasks[ctx.channel.name][user].cancel()
+            self.asyncTasks[ctx.channel.name] = dict()
             self.pomo.active_timers[ctx.channel.name.lower()] = dict()
             botDatabase.updateAllTimers(ctx.channel.name, [])
             await ctx.reply(f"Purging all tasks and pomos from board!")
@@ -551,7 +551,9 @@ class CoWorkingBot(Bot):
                                     ctx: commands.Context,
                                     user: str = ''):
         if (ctx.author.is_mod):
-            for user, task in self.tasks[ctx.channel.name].items():
+            users = self.tasks[ctx.channel.name].keys()
+            for user in users:
+                task = self.tasks[ctx.channel.name][user]
                 if (task.done == True):
                     self.tasks[ctx.channel.name].pop(user)
                     botDatabase.removeTimer(ctx.channel.name, user)

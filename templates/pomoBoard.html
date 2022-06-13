@@ -28,6 +28,7 @@
                             $("#board").append('<tr class="task" id="' + i + '"></tr>');
                             $("#" + i).append('<td class="col0" id="' + i + 'Col0"></td>');
                             $("#" + i).append('<td class="col1" id="' + i + 'Col1"></td>');
+                            $("#" + i).append('<td class="col2" id="' + i + 'Col2"></td>');
                             if (content.iterStartTime) {
                                 $("#" + i + "Col1").append('<span class="username">' + content
                                     .userDisplayName + '</span>: ');
@@ -54,13 +55,18 @@
                             } else {
                                 $("#" + i + "Col0").append('<input type="checkbox" id="' + i +
                                     'Done"></input>')
-                                if (content.done == true) {
-                                    $("#" + i + "Done").prop('checked', true);
-                                }
                                 $("#" + i + "Col1").append('<span class="username">' + content
                                     .userDisplayName + '</span>: ');
-                                $("#" + i + "Col1").append('<span class="work">' + content.work
-                                    .replace(/</, "&lt;").replace(/>/, '&gt;') + '</span> ')
+
+                                if (content.done == true) {
+                                    $("#" + i + "Done").prop('checked', true);
+                                    $("#" + i + "Col1").append('<span class="work"><del>' + content.work
+                                        .replace(/</, "&lt;").replace(/>/, '&gt;') + '</del></span> ')
+                                }
+                                else{
+                                    $("#" + i + "Col1").append('<span class="work">' + content.work
+                                        .replace(/</, "&lt;").replace(/>/, '&gt;') + '</span> ')
+                                }
                             }
                             if ($('#' + i).text().length > 55) {
                                 let difference = $('#' + i).text().length - 55;

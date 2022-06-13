@@ -1,3 +1,8 @@
+table, tr {
+  width: 100%;
+  table-layout: fixed;
+}
+
 table {
     white-space: nowrap;
     display: inline-block;
@@ -12,6 +17,17 @@ table {
     text-align: right;
     width: 2.25em;
     padding-right: 5px;
+}
+
+.col1{
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.col2{
+/*     display: hidden; */
 }
 
 .username {
@@ -38,7 +54,7 @@ input[type="checkbox"] {
     -moz-appearance: none;
     appearance: none;
     width: 3.5em;
-    height: 1.5em;
+    height: 2em;
     background: #ddd;
     border-radius: 3em;
     position: relative;
@@ -55,8 +71,8 @@ input[type="checkbox"]:checked {
 input[type="checkbox"]:after {
     position: absolute;
     content: "";
-    width: 1.5em;
-    height: 1.5em;
+    width: 2em;
+    height: 2em;
     border-radius: 50%;
     background: #fff;
     -webkit-box-shadow: 0 0 .25em rgba(0, 0, 0, .3);
@@ -69,5 +85,5 @@ input[type="checkbox"]:after {
 }
 
 input[type="checkbox"]:checked:after {
-    left: calc(100% - 1.5em);
+    left: calc(100% - 2em);
 }
